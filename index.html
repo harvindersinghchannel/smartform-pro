@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartForm Pro - Image Capture Data Collection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">SmartForm Pro</h1>
+            <p class="subtitle">Complete your information and capture your photo</p>
+        </header>
+
+        <main class="main-content">
+            <form id="dataForm" class="form-container">
+                <div class="form-section">
+                    <h2 class="section-title">Personal Information</h2>
+                    
+                    <div class="form-group">
+                        <label for="fullName" class="form-label">Full Name *</label>
+                        <input type="text" id="fullName" name="fullName" class="form-input" required>
+                        <span class="error-message" id="fullNameError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email Address *</label>
+                        <input type="email" id="email" name="email" class="form-input" required>
+                        <span class="error-message" id="emailError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone" class="form-label">Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" class="form-input" required>
+                        <span class="error-message" id="phoneError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="department" class="form-label">Department *</label>
+                        <select id="department" name="department" class="form-input" required>
+                            <option value="">Select Department</option>
+                            <option value="HR">Human Resources</option>
+                            <option value="IT">Information Technology</option>
+                            <option value="Finance">Finance</option>
+                            <option value="Marketing">Marketing</option>
+                            <option value="Operations">Operations</option>
+                        </select>
+                        <span class="error-message" id="departmentError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="comments" class="form-label">Additional Comments</label>
+                        <textarea id="comments" name="comments" class="form-input" rows="3"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2 class="section-title">Photo Capture</h2>
+                    
+                    <div class="camera-container">
+                        <div class="camera-view">
+                            <video id="videoElement" class="video-feed" autoplay></video>
+                            <canvas id="canvas" class="hidden"></canvas>
+                            <img id="capturedImage" class="captured-image hidden" alt="Captured photo">
+                        </div>
+                        
+                        <div class="camera-controls">
+                            <button type="button" id="startCamera" class="btn btn-secondary">
+                                <span class="btn-icon">📷</span> Start Camera
+                            </button>
+                            <button type="button" id="capturePhoto" class="btn btn-primary hidden">
+                                <span class="btn-icon">📸</span> Capture Photo
+                            </button>
+                            <button type="button" id="retakePhoto" class="btn btn-secondary hidden">
+                                <span class="btn-icon">🔄</span> Retake
+                            </button>
+                        </div>
+                        
+                        <div class="camera-status" id="cameraStatus">
+                            Click "Start Camera" to begin
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" id="submitForm" class="btn btn-success btn-large" disabled>
+                        <span class="btn-icon">✓</span> Submit Form
+                    </button>
+                    <button type="reset" id="resetForm" class="btn btn-outline">
+                        <span class="btn-icon">↺</span> Reset Form
+                    </button>
+                </div>
+            </form>
+        </main>
+
+        <div id="loadingOverlay" class="loading-overlay hidden">
+            <div class="loading-spinner"></div>
+            <p class="loading-text">Processing your submission...</p>
+        </div>
+
+        <div id="successModal" class="modal hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">✅ Submission Successful!</h3>
+                </div>
+                <div class="modal-body">
+                    <p>Your information has been successfully submitted.</p>
+                    <p class="submission-details" id="submissionDetails"></p>
+                </div>
+                <div class="modal-footer">
+                    <button id="newSubmission" class="btn btn-primary">New Submission</button>
+                    <button id="closeModal" class="btn btn-secondary">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script src="camera.js"></script>
+</body>
+</html>
